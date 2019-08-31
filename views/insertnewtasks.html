@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>
+    <a href="/">Home</a>
+    <a href="/getalltasks">Get All Tasks</a>
+    <a href="/deletetask">Delete Task</a>
+    <a href="/deletealltask">Delete Completed Tasks</a>
+    <a href="/updatetask">Update Tasks</a>
+</h1>
+
+<form action="/addnewtasks" method="POST">
+    Task Name <input type="text" method="POST" name="tname" /> </br></br>
+    Task Assign To <input type="text" method="POST" name="tuser" /> </br></br>
+    Task Date <input type="date" method="POST" name="tdate" /> </br></br>
+    Task Status <input list ="status" method="POST" name="tstat" />
+    <datalist id="status">
+        <option value="Completed">
+        <option value="InProgress">
+    </datalist></br></br>
+    Task Description <input type="text" method="POST" name="tdesc" /> </br></br>
+    <input type="submit" value="Submit" /> </br>
+</form>

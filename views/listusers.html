@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+<h1>List Users</h1> </br>
+<h1> <a href="/">Insert Users</a>
+    <a href="/getusers">List Users</a>
+    <a href="/updateuser">Update User</a>
+    <a href="/deleteuser">Delete User</a>
+</h1>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Address</td>
+    </tr>
+    <% for (let i=0;i<usersDb.length;i++){ %>
+    <tr>
+        <td><%= usersDb[i].name %> </td>
+        <td> <%= usersDb[i].age %> </td>
+        <td><%= usersDb[i].address %></td>
+    </tr>
+    <%}%>
+</table>
+</body>
+</html>

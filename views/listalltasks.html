@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="tstyle.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+</body>
+<h1>
+    <a href = "/">Home</a>
+    <a href="/addnewtasks">Insert Tasks</a>
+    <a href="/deletetask">Delete Task</a>
+    <a href="/deletealltask">Delete Completed Tasks</a>
+    <a href="/updatetask">Update Tasks</a>
+</h1></br></br>
+
+<h3>
+    <table>
+        <tr>
+            <td>Task ID</td>
+            <td>Task Name</td>
+            <td>Task Assign</td>
+            <td>Task Data</td>
+            <td>Task Status</td>
+            <td>Task Description</td>
+        </tr>
+        <% for ( var i =0; i< taskDb.length;i++){ %>
+        <tr>
+            <td>
+                <%= taskDb[i].taskID %>
+            </td>
+            <td>
+                <%= taskDb[i].taskName %>
+            </td>
+            <td>
+                <%= taskDb[i].taskAssign %>
+            </td>
+            <td>
+                <%= taskDb[i].taskDate %>
+            </td>
+            <td>
+                <%= taskDb[i].taskStatus %>
+            </td>
+            <td>
+                <%= taskDb[i].taskDescription %>
+            </td>
+        </tr>
+        <% }%>
+</h3>
+</body>
+</html>
