@@ -24,7 +24,7 @@ const url = "mongodb://localhost:27017/";
 
 //reference to the database (i.e. collection)
 let db;
-//let coll;
+let coll;
 //Connect to mongoDB server
 MongoClient.connect(url, { useNewUrlParser: true },
     function (err, client) {
@@ -33,7 +33,7 @@ MongoClient.connect(url, { useNewUrlParser: true },
         } else {
             console.log("Connected successfully to server");
             db = client.db("tasks");
-            //coll = db.createCollection('task');
+            coll = db.collection('task');
         }
 
     });
@@ -52,14 +52,14 @@ app.get('/addnewtasks', function (req, res) {
 app.post('/addnewtasks', function(req,res){
     let taskDetails = req.body;
     let newId= Math.round(Math.random()*1000)
-    db.collection('tasks').insertOne({taskID: newId, taskName: taskDetails.tname, taskAssign: taskDetails.tuser, taskDate: taskDetails.tdate, taskStatus: taskDetails.tstat, taskDescription: taskDetails.tdesc});
+    coll.insertOne({taskID: newId, taskName: taskDetails.tname, taskAssign: taskDetails.tuser, taskDate: taskDetails.tdate, taskStatus: taskDetails.tstat, taskDescription: taskDetails.tdesc});
     //coll.insertOne({taskID: newId, taskName: taskDetails.tname, taskAssign: taskDetails.tuser, taskDate: taskDetails.tdate, taskStatus: taskDetails.tstat, taskDescription: taskDetails.tdesc});
     res.redirect('/getalltasks');
 });
 
 //get all tasks
 app.get('/getalltasks', function (req, res) {
-    db.collection('tasks').find({}).toArray(function (err, data) {
+    coll.find({}).toArray(function (err, data) {
         res.render('listalltasks', { taskDb: data });
     });
 });
@@ -72,14 +72,14 @@ app.get('/deletetask', function(req,res){
 app.post('/deletetask', function(req,res){
     let taskDetails = req.body;
     let filter = {taskID: parseInt(taskDetails.taskid)}; //to put the taskID as a integer
-    db.collection('tasks').deleteOne(filter);
+    coll.deleteOne(filter);
     res.redirect('/getalltasks');
 });
 
 //delete all completed tasks
 app.get('/deletealltask', function(req,res){
     let filter = {taskStatus: 'Completed'};
-    db.collection('tasks').deleteMany(filter);
+    coll.deleteMany(filter);
     res.redirect('/getalltasks');
 });
 
@@ -92,6 +92,6 @@ app.post('/updatetask', function(req,res){
     let taskDetails = req.body;
     let filter = {taskID: parseInt(taskDetails.taskid)};
     let theUpdate = {$set: {taskStatus: taskDetails.newstat}};
-    db.collection('tasks').updateOne(filter, theUpdate);
+    coll.updateOne(filter, theUpdate);
     res.redirect('/getalltasks');
 });

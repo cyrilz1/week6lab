@@ -121,3 +121,12 @@ app.post('/newdocuments',function(req,res){
    col.insertOne(newDoc);
    res.redirect('/');
 });
+
+//Retrieve all the new cars with year >= 2015 (Tutorial Work)
+app.get('/getnewcar', function(req,res){
+   let query = {year{$gte:2015}};
+   col2.deleteMany(query).toArray(function(err,obj){
+      console.log(obj.result);
+      res.redirect('/getcars');
+   });
+});
