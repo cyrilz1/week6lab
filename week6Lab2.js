@@ -95,3 +95,26 @@ app.post('/updatetask', function(req,res){
     coll.updateOne(filter, theUpdate);
     res.redirect('/getalltasks');
 });
+
+app.get('/deleteOldComplete', function(req,res){
+    let currentDate = new Date();
+    let mm = currentDate.getMonth() + 1;
+    let yy = currentDate.getFullYear();
+    let dd = currentDate.getDay() + 1;
+
+    if (mm < 10){mm = "0" + mm};
+    if (dd < 10){dd = "0" + dd};
+
+    let fullDate = yy + '-' + mm + '-' + dd;
+    let filter = {$and:[{taskStatus: 'Completed'},{taskDate: {$lt: fullDate} }]};
+    coll.deleteMany(filter);
+    res.redirect('/getalltasks');
+});
+
+app.post('/deleteOldComplete2',function(req,res){
+    let dueDate = req.body.taskDate;
+    let filter = {$and:[{taskStatus: 'Completed'},{dueDate: {$lt: new Date()} }]};
+    coll.deleteMany(filter);
+    res.redirect('/getalltasks');
+
+})
